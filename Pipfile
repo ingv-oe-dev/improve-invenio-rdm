@@ -7,7 +7,10 @@ verify_ssl = true
 check-manifest = ">=0.25"
 
 [packages]
-invenio-app-rdm = {extras = ["postgresql", "opensearch2"], version = "~=10.1.0"}
+invenio-assets = {path = "../invenio-assets"}
+invenio-app-rdm = {extras = ["postgresql", "opensearch2"], path = "../invenio-app-rdm", version = "10.1.0" }
+invenio-rdm-records = {extras = ["opensearch2"], path = "../invenio-rdm-records"}
+oedatarep-ts-loader = {path = "../oedatarep-ts-loader"}
 uwsgi = ">=2.0"
 uwsgitop = ">=0.11"
 uwsgi-tools = ">=1.1.1"

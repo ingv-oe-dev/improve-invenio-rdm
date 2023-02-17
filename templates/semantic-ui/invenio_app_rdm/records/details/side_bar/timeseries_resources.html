@@ -1,0 +1,46 @@
+{%- if record.metadata.ts_resources -%}
+    {% set chartresource = record.metadata.ts_resources %}
+    {%- if chartresource|length > 0 -%}
+        {% set published = [] %}
+        {% for ts in chartresource %}
+            {%- if ts.ts_published -%}
+                {% set published = published.append(ts) %}
+            {%- endif -%}
+        {%- endfor -%}
+    {%- endif -%}
+    {%- if config.get("TSD_API_URL") -%}
+        {% set tsdws = config.get("TSD_API_URL") %}
+            {%- if published|length > 0 -%}
+                <section id="ts-res-record" aria-label="{{ _('Timeseries resources') }}" class="ui segment rdm-sidebar ts_resources">
+                    <h2 class="ui small header">{{ _('Timeseries resources')}}</h2>
+                    <div role="list" class="ui list">
+                        {% for ts in published %}
+                            <div role="listitem"><b>{{ ts.name }}</b>
+                                <div role="list" class="ui list">
+                                    {%- if config.get("SWAGGER_URL") -%}
+                                        {% set api_ui = config.get("SWAGGER_URL") %}
+                                        <div id="query-builder" data-apiui="{{ api_ui }}?timeseries_id={{ ts.guid }}&origin=oedatarep"></div>
+                                    {%- else %}
+                                        <div role="listitem" class=""><a href="{{ tsdws }}/swagger-ui/dist?timeseries_id={{ ts.guid }}&origin=oedatarep" target="_blank">Query builder</a></div>
+                                        <div role="listitem" class=""><a href="{{ ts.tsdws_url }}" target="_blank">Preview data</a></div>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="ui divider hidden"></div>
+
+                    <!-- <div class="ui container">
+                        {%- if config.get("SWAGGER_URL") -%}
+                            {% set api_ui = config.get("SWAGGER_URL") %}
+                            <div id="query-builder" data-apiui="{{ api_ui }}"></div>
+                        {%- endif -%}
+                    </div> -->
+                </section>
+            {%- endif -%}
+    {%- endif -%}
+{%- endif -%}
+
+{%- block javascript %}
+    {{ webpack['datarep-landing-page-swaggerui.js'] }}
+{%- endblock javascript %}

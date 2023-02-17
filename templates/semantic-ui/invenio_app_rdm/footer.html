@@ -1,0 +1,66 @@
+{#
+
+  Copyright (C) 2019-2020 CERN.
+  Copyright (C) 2019-2020 Northwestern University.
+  Copyright (C)      2021 Graz University of Technology.
+
+  Invenio App RDM is free software; you can redistribute it and/or modify it
+  under the terms of the MIT License; see LICENSE file for more details.
+#}
+
+<footer id="rdm-footer-element">
+  {%- block footer_top %}
+    <div class="footer-top">
+      <div class="ui container">
+        {%- block footer_top_left %}
+        <div class="ui grid">
+          <div class="rdm-footer five wide tablet two wide computer column">
+            <h2 class="ui small header">{{ _(config.THEME_FRONTPAGE_TITLE) }}</h2>
+            <p><a href="/help/search">Search Guide</a> <i class="icon search right"></i></p>
+            <p><a href="https://improve-etn.eu" target="_blank">Web site</a> <i class="icon external alternate"></i></p>
+          </div>
+        {%- endblock footer_top_left %}
+        {%- block footer_top_right %}
+          <div class="rdm-footer five wide tablet five wide right floated computer column">
+            <div class="ui items">
+              <div class="item">
+                <div class="ui small image">
+                  <a href="https://cordis.europa.eu/project/id/858092" target="_blank"><img src="/static/images/EU_Flag.png" class="ui small middle aligned rounded image"/></a>
+                </div>
+                <div class="container content middle aligned">
+                  <div>
+                    <p>This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement <a href="https://cordis.europa.eu/project/id/858092" target="_blank">No 858092</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%- endblock footer_top_right %}
+    </div>
+  </div>
+  {%- endblock footer_top %}
+  {%- block footer_bottom %}
+  <div class="footer-bottom sub-footer">
+    <div class="ui container">
+      <div class="ui grid">
+        <div class="eight wide column left middle aligned">
+          {%- block footer_bottom_left %}
+          {% trans ingv_oe="https://www.ct.ingv.it/" %}Operated by <a href="{{ ingv_oe }}">INGV - OE</a>{% endtrans %} |  
+          {% trans invenio_rdm="http://inveniosoftware.org/products/rdm" %}Powered by <a
+            href="{{invenio_rdm}}">InvenioRDM</a>{% endtrans %}
+          {%- endblock footer_bottom_left %}
+        </div>
+        <div class="eight wide column right aligned">
+          {%- block footer_bottom_right %}
+          {%- if config.I18N_LANGUAGES %}
+          {% from "invenio_i18n/macros/language_selector.html" import language_selector_dropdown %}
+          {{ language_selector_dropdown() }}
+          {%- endif %}
+          {%- endblock footer_bottom_right %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {%- endblock footer_bottom %}
+</footer>
