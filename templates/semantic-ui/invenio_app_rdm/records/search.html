@@ -18,7 +18,10 @@
     {%- if config.ACCOUNTS and current_user.is_authenticated %}
     <div data-invenio-search-config='{{ search_app_rdm_config(app_id="rdm-search") | tojson }}'></div>
     {%- else %}
-    <h1> ta loggari!!!</h1>
+    <div class="ui negative message">
+      <div class="header">Authentication required</div>
+        <p>You need to be authenticated to access this page, please <a href="{{ url_for_security('login', next=request.path) }}">{{ _('Log in') }}</a></p>
+      </div>
     {%- endif %}
   </div>
   {%- endblock page_body %}
