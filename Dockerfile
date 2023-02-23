@@ -10,6 +10,13 @@
 
 FROM inveniosoftware/centos8-python:3.8
 
+# Clone custom repositories
+RUN git clone --depth 1 --branch v0.2 https://github.com/ingv-oe-dev/invenio-assets.git ../invenio-assets
+RUN git clone --depth 1 --branch maint-10.x https://github.com/ingv-oe-dev/invenio-app-rdm.git ../invenio-app-rdm
+RUN git clone --depth 1 --branch maint-0.39.x https://github.com/ingv-oe-dev/invenio-rdm-records.git ../invenio-rdm-records
+RUN git clone --depth 1 --branch master https://github.com/ingv-oe-dev/invenio-accounts.git ../invenio-accounts
+RUN git clone --depth 1 --branch improve-proj https://github.com/ingv-oe-dev/oedatarep-ts-loader.git ../oedatarep-ts-loader
+
 COPY Pipfile Pipfile.lock ./
 RUN pipenv install --deploy --system
 

@@ -8,7 +8,8 @@ check-manifest = ">=0.25"
 
 [packages]
 invenio-assets = {path = "../invenio-assets"}
-invenio-app-rdm = {extras = ["postgresql", "opensearch2"], path = "../invenio-app-rdm", version = "10.1.0" }
+invenio-app-rdm = {extras = ["postgresql", "opensearch2"], path = "../invenio-app-rdm", version = "~=10.1.0" }
+invenio-accounts = {path = "../invenio-accounts"}
 invenio-rdm-records = {extras = ["opensearch2"], path = "../invenio-rdm-records"}
 oedatarep-ts-loader = {path = "../oedatarep-ts-loader"}
 uwsgi = ">=2.0"
