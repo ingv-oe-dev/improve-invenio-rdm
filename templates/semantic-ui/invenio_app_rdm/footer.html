@@ -18,6 +18,10 @@
             <h2 class="ui small header">{{ _(config.THEME_FRONTPAGE_TITLE) }}</h2>
             <p><a href="/help/search">Search Guide</a> <i class="icon search right"></i></p>
             <p><a href="https://improve-etn.eu" target="_blank">Web site</a> <i class="icon external alternate"></i></p>
+            {%- if config.IMPROVE_SUPPORT_EMAIL %}
+              <p><a href="mailto:support.improverep@ct.ingv.it">Contact Us</a> <i class="icon envelope alternate"></i></p>
+            {%- endif %}
+            <p><a href="mailto:"></a></p>
           </div>
         {%- endblock footer_top_left %}
         {%- block footer_top_right %}
