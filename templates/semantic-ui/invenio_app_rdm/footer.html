@@ -21,8 +21,16 @@
             {%- if config.IMPROVE_SUPPORT_EMAIL %}
               <p><a href="mailto:support.improverep@ct.ingv.it">Contact Us</a> <i class="icon envelope alternate"></i></p>
             {%- endif %}
-            <p><a href="mailto:"></a></p>
           </div>
+          {%- if config.IMPROVE_STATIC_RESOURCES and config.IMPROVE_STATIC_RESOURCES | length > 0 %}
+          <div class="rdm-footer five wide tablet two wide computer column">
+            <h2 class="ui small header">Resources</h2>
+            {%- set resources = config.IMPROVE_STATIC_RESOURCES %}
+            {%- for resource in resources %}
+              <p><a href="/static/{{ resource.res }}" target="_blank">{{ resource.label }}</a> <i class="icon external alternate"></i></p>
+            {%- endfor %}
+          </div>
+          {%- endif %}
         {%- endblock footer_top_left %}
         {%- block footer_top_right %}
           <div class="rdm-footer five wide tablet five wide right floated computer column">
