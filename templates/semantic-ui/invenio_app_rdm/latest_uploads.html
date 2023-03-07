@@ -1,0 +1,58 @@
+{%- from "invenio_app_rdm/macros/authors.html" import creators -%}
+
+<h2 class="ui center aligned header">
+    Recent uploads
+  </h2>
+  {% if not records %}
+  <div class="ui centered grid">
+    <p style="font-size: medium;">{{_('There are no public records to show.')}}</p>
+  </div>
+  {% endif %}
+
+  {%- for r in records %}
+  {%- set creation_date = r.created|from_isodatetime -%}
+  {%- set record_url = url_for('invenio_app_rdm_records.record_detail', pid_value=r.id) %}
+  <div class="ui divided items">
+    <div class="item">
+      <div class="content">
+        <div class="ui grid">
+          <div class="two column row">
+            <div class="twelve wide computer sixteen wide mobile sixteen wide tablet column">
+              <div class="extra labels-actions">
+                <div class="ui tiny label blue" data-tooltip="{{_('Publication date')}}">
+                  {{ r.metadata.publication_date }} {{ '(' ~ r.metadata.version ~ ')' if r.metadata.version }}
+                </div>
+                <div class="ui tiny label grey" data-tooltip="{{_('Resource type')}}">
+                  {{ r.ui.resource_type.title_l10n }}
+                </div>
+                <div class="ui tiny label access-status {{ r.ui.access_status.id }}" data-tooltip="{{ r.ui.access_status.description_l10n }}">
+                  {% if r.ui.access_status.icon %}<i class="icon {{ r.ui.access_status.icon }}"></i>{% endif %}
+                  {{ r.ui.access_status.title_l10n }}
+                </div>
+              </div>
+              <h3>
+                <a href="{{ record_url }}" class="no-decoration">{{ r.metadata.title }}</a>
+              </h3>
+              <div class="meta"><span class="cinema">{{ creators(r.metadata.creators) }}</span></div>
+              <div class="ui justified container description ">
+                  <p>{{ r.metadata.description | striptags | truncate(300) }}</p>
+              </div>
+            </div>
+            {% if r.metadata.cover %}
+            <div class="computer only four wide column">
+                <img src="{{ r.metadata.cover }}" class="ui medium bordered rounded image" alt="Record cover">
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui divider"></div>
+  {%- endfor %}
+  {% if records %}
+  <div class="ui divider hidden"></div>
+  <div class="ui centered grid">
+    <a class="ui button more" href="{{url_for('invenio_search_ui.search')}}">{{_('More')}}</a>
+  </div>
+  {%- endif %}
