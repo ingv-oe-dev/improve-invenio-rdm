@@ -19,6 +19,14 @@
       <div class="twelve wide column">
         {%- if config.ACCOUNTS and current_user.is_authenticated %}
           {%- include "invenio_app_rdm/latest_uploads.html" %}
+        {%- else %}
+        <div>
+          <h2 class="ui icon center aligned header">
+            <i aria-hidden="true" class="lock circular icon"></i>
+            <div class="content">Access to this repository's data is currently granted to project members and partners only.</div>
+          </h2>
+          <div class="ui center aligned sub header">Please <a href="/login">login</a> with your credentials.</div>
+        </div>
         {%- endif %}
       </div>
       <div class="four wide column">
